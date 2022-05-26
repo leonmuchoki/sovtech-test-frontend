@@ -1,11 +1,14 @@
 ### `SOVTECH TEST - FRONTEND`
 Built using react.\
-Backend is build using .Net Core web api (https://github.com/leonmuchoki/SovTechTest)
+Backend is build using .Net Core web api (https://github.com/leonmuchoki/SovTechTest) 
 
 ### `npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+
+If no data shows, check the port the api is running on locally. Currently set to https://localhost:44370/ .\
+You can update this in the api folder files
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
