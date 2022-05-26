@@ -7,6 +7,7 @@ import Header from './components/Header';
 import ChuckCategories from './components/ChuckCategories';
 import ChuckCategoryDetail from './components/ChuckCategoryDetail';
 import SwapiPeople from './components/SwapiPeople';
+import Search from './components/Search';
 import {
   BrowserRouter as Router,
   Routes,
@@ -26,6 +27,7 @@ function App() {
               <Route path='/categories' element={<ChuckCategories/>} />
               <Route path='/category/:category' element={<ChuckCategoryDetail/>} />
               <Route path='/people' element={<SwapiPeople/>} />
+              <Route path='/search' element={<Search/>} />
               <Route path='/' element={<ChuckCategories/>} />
             </Routes>
           </div>

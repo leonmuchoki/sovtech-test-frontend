@@ -40,7 +40,7 @@ const SwapiPeople =()=> {
     const classes = useStyles();
     const [people, setSwapiPeople] = useState([]);
     const [page, setPage] = React.useState(0);
-    const [rowsPerPage, setRowsPerPage] = React.useState(5);
+    const [rowsPerPage, setRowsPerPage] = React.useState(10);
     const [isLoading, setIsLoading] = useState(false);
 
     const handleChangePage = (event, newPage) => {
@@ -56,7 +56,7 @@ const SwapiPeople =()=> {
         const getSwapiPeopleData =async()=> {
             setIsLoading(true);
             const people = await swapiApi.getSwapiPeople();
-            console.log("swapi people " + JSON.stringify(people));
+            console.log("swapi people count" + people.length + " peeps: " + JSON.stringify(people));
             if(people) setSwapiPeople(people);
             setIsLoading(false);
         };
@@ -82,9 +82,9 @@ const SwapiPeople =()=> {
                 </TableRow>
             </TableHead>
             <TableBody>
-                {people.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row) => {
+                {people.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, i) => {
                 return (
-                    <TableRow hover role="checkbox" tabIndex={-1} key={row.code}>
+                    <TableRow hover role="checkbox" tabIndex={-1} key={i}>
                     {columns.map((column) => {
                         const value = row[column.id];
                         return (

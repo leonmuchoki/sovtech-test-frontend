@@ -24,7 +24,7 @@ const ChuckCategories =()=> {
         const getChuckCategoryData =async()=> {
             setIsLoading(true);
             const categories = await chuckApi.getChuckCategories();
-            console.log("chuck categories " + JSON.stringify(categories));
+            console.log("chucks length " + categories.length + " categories" + JSON.stringify(categories));
             if(categories) setChuckCategories(categories);
             setIsLoading(false);
         };

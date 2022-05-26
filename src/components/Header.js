@@ -24,6 +24,7 @@ const Header =()=> {
                 </Typography>
               {/*   <Link to="categories">Chuck Categories</Link>
                 <Link to="/people">Chuck Categories</Link> */}
+                <Button color="inherit" onClick={() => navigate("/search")}>SEARCH</Button>
                 <Button color="inherit" onClick={() => navigate("/categories")}>Chuck Categories</Button>
                 <Button color="inherit" onClick={() => navigate("/people")}>Star Wars people</Button>
             </Toolbar>
