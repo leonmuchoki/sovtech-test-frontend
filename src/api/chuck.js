@@ -21,6 +21,24 @@ const getChuckCategories = () => {
         });
 };
 
+const getChuckCategory = (category) => {
+    return fetch(`${baseUri}/api/chuck/${category}`,{
+        method: 'GET',
+        headers: headers
+        })
+        .then((response) =>  {
+            if (response.ok)
+                return response.json();
+            throw response;
+        })
+        .then((data) => data)
+        .catch((error) => {
+            console.error(error);
+            return error;
+        });
+};
+
 export default {
     getChuckCategories,
+    getChuckCategory
 };

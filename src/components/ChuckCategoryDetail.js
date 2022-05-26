@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
 import { makeStyles } from '@material-ui/core/styles';
+import { useParams } from 'react-router';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -14,38 +14,34 @@ import Typography from '@material-ui/core/Typography';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { chuckApi } from '../api'
 
-const ChuckCategories =()=> {
+const ChuckCategoryDetail =(props)=> {
     const classes = useStyles();
-    const [chuckCategories, setChuckCategories] = useState([]);
+    const [chuckCategory, setChuckCategory] = useState({});
     const [isLoading, setIsLoading] = useState(false);
-    const navigate = useNavigate();
+    const { category } = useParams();
 
     useEffect(() => {
         const getChuckCategoryData =async()=> {
             setIsLoading(true);
-            const categories = await chuckApi.getChuckCategories();
-            console.log("chuck categories " + JSON.stringify(categories));
-            if(categories) setChuckCategories(categories);
+
+            const categoryData = await chuckApi.getChuckCategory(category);
+            console.log("chuck_category " + JSON.stringify(categoryData));
+            if(categoryData) setChuckCategory(categoryData);
+
             setIsLoading(false);
         };
         getChuckCategoryData();
-    }, [])
+    }, [category])
 
     return (
         <div className={classes.root}>
             <Card className={classes.root2}>
                 <CardContent>
+                    <h1>{Array.isArray(chuckCategory?.categories) && chuckCategory?.categories[0]} joke:</h1>
                     {isLoading && <CircularProgress />}
-                    <List component="nav" aria-label="main mailbox folders">
-                        {chuckCategories && chuckCategories.map((category, index) => (
-                            <ListItem button key={index} onClick={() => navigate(`/category/${category}`)}>
-                                <ListItemIcon>
-                                    <InfoIcon />
-                                </ListItemIcon>
-                                <ListItemText primary={category} />
-                            </ListItem>
-                        ))}
-                    </List>
+                    <Typography className={classes.title} color="textSecondary" gutterBottom>
+                        {chuckCategory?.value}
+                    </Typography>
                 </CardContent>
             </Card>
         </div>
@@ -74,4 +70,4 @@ const useStyles = makeStyles((theme) => ({
       },
   }));
   
-export default ChuckCategories;
+export default ChuckCategoryDetail;

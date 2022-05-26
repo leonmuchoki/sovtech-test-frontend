@@ -1,4 +1,5 @@
 import React from 'react';
+import { useNavigate, useHref } from 'react-router-dom'; 
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -10,6 +11,7 @@ import { Link } from 'react-router-dom';
 
 const Header =()=> {
     const classes = useStyles();
+    const navigate = useNavigate();
 
     return (
         <AppBar position="static">
@@ -20,8 +22,10 @@ const Header =()=> {
                 <Typography variant="h6" className={classes.title}>
                 CHUCK SWAPI
                 </Typography>
-                <Button color="inherit" href="/categories">Chuck Categories</Button>
-                <Button color="inherit" href="/people">Star Wars people</Button>
+              {/*   <Link to="categories">Chuck Categories</Link>
+                <Link to="/people">Chuck Categories</Link> */}
+                <Button color="inherit" onClick={() => navigate("/categories")}>Chuck Categories</Button>
+                <Button color="inherit" onClick={() => navigate("/people")}>Star Wars people</Button>
             </Toolbar>
         </AppBar>
     );

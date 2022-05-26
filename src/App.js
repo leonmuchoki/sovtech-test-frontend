@@ -5,6 +5,7 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Header from './components/Header';
 import ChuckCategories from './components/ChuckCategories';
+import ChuckCategoryDetail from './components/ChuckCategoryDetail';
 import SwapiPeople from './components/SwapiPeople';
 import {
   BrowserRouter as Router,
@@ -18,11 +19,12 @@ function App() {
       <React.Fragment>
       <CssBaseline />
       <Container>
-        <Header />
         <Router>
+          <Header />
           <div>
             <Routes>
               <Route path='/categories' element={<ChuckCategories/>} />
+              <Route path='/category/:category' element={<ChuckCategoryDetail/>} />
               <Route path='/people' element={<SwapiPeople/>} />
               <Route path='/' element={<ChuckCategories/>} />
             </Routes>

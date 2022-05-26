@@ -1,12 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InfoIcon from '@material-ui/icons/Info';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -14,6 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { swapiApi } from '../api'
 
@@ -47,7 +41,8 @@ const SwapiPeople =()=> {
     const [people, setSwapiPeople] = useState([]);
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  
+    const [isLoading, setIsLoading] = useState(false);
+
     const handleChangePage = (event, newPage) => {
       setPage(newPage);
     };
@@ -59,15 +54,18 @@ const SwapiPeople =()=> {
 
     useEffect(() => {
         const getSwapiPeopleData =async()=> {
+            setIsLoading(true);
             const people = await swapiApi.getSwapiPeople();
             console.log("swapi people " + JSON.stringify(people));
             if(people) setSwapiPeople(people);
+            setIsLoading(false);
         };
         getSwapiPeopleData();
     }, [])
 
     return (
         <div className={classes.root}>
+            {isLoading && <CircularProgress />}
             <TableContainer className={classes.container}>
             <Table stickyHeader aria-label="sticky table">
             <TableHead>
